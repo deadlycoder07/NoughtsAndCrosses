@@ -1,4 +1,3 @@
-from network import Network
 import socket 
 
 gamesocket= socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

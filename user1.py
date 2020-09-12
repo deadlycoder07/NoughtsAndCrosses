@@ -3,6 +3,7 @@ import socket
 
 gamesocket= socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 b = []
+label = None
 
 class Game():
     def __init__(self):
@@ -62,20 +63,22 @@ class Game():
         return b
 
     def click(self, box):
-        b[box].config(text="O", state=tkinter.DISABLED, disabledforeground=self.color[0])
-        self.stat[box] = 1
-        print(box)
+        b[box].config(text="X", state=tkinter.DISABLED, disabledforeground=self.color[0])
+        self.stat[box+1] = 1
         self.move_count += 1
         gamesocket.sendto(str(box).encode('utf-8'),(socket.gethostname(),8001))
         self.check_win()
+        print(self.stat)
+        label.config(text=self.labels[1],  font=('arial', 20, 'bold'))
         self.update()
 
     def update(self):
         data, client_address = gamesocket.recvfrom(1024)
-        self.stat[int(data)] = 0
+        self.stat[int(data)+1] = 0
         print(int(data))
         self.move_count += 1
-        b[int(data)].config(text='X', state=tkinter.DISABLED, disabledforeground=self.color[1])
+        b[int(data)].config(text='O', state=tkinter.DISABLED, disabledforeground=self.color[1])
+        label.config(text=self.labels[0],  font=('arial', 20, 'bold'))
         self.check_win()
         return
 
@@ -91,8 +94,8 @@ class Game():
                 c += 1
         label = tkinter.Label(text=self.labels[1], font=('arial', 20, 'bold'))
         label.grid(row=3, column=0, columnspan=3)
-        self.update()
         tk.mainloop()
+        self.update()
 
     def check_win(self):
         x = None

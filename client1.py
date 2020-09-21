@@ -6,8 +6,8 @@ gamesocket.bind((socket.gethostname(), 8000))
 print("Running on :", socket.gethostname())
 
 data = "PING"
-
+print("Sending: PING")
 gamesocket.sendto(str(data).encode('utf-8'),(socket.gethostname(),8001))
 recv_data = gamesocket.recv(4096).decode('utf-8')
 
-print(recv_data)
+print("Recieved: "+recv_data)

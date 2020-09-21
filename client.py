@@ -33,6 +33,7 @@ def receive_data():
             grid.game_over = True
         if grid.get_cell_value(x, y) == 0:
             grid.set_cell_value(x, y, 'X')
+            grid.check_grid(x, y, 'X')
 
 # run the blocking functions in a separate thread
 create_thread(receive_data)

@@ -14,14 +14,13 @@ def Main():
 	while True: 
 		
 		s.send(message.encode('ascii')) 
-        data = s.recv(1024) 
-        print('Received from the server :',str(data.decode('ascii'))) 
-
+        	data = s.recv(1024) 
+        	print('Received from the server :',str(data.decode('ascii'))) 
 		# ask the client whether he wants to continue 
-        ans = input('\nDo you want to continue(y/n) :') 
-        if ans == 'y': 
+        	ans = input('\nDo you want to continue(y/n) :') 
+        	if ans == 'y': 
 			continue
-        else: 
+	        else: 
 			break
 	
 	s.close() 
